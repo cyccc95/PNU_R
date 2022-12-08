@@ -1,0 +1,8 @@
+# 필요한 패키지와 라이브러리를 가져옴
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+mpl.rc('font',family='Malgun Gothic')   # 맑은 고딕으로 그래프한글설정
+
+# 그래프에서 마이너스 폰트 깨지는 문제에 대한 대처
+mpl.rcParams['axes.unicode_minus'] = False
