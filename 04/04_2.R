@@ -14,3 +14,21 @@
 # 높음: 75이상 80미만
 # 보통: 68이상 75미만
 # 낮음: 68미만
+
+df <- read.csv("C:/Rwork/04/04_기상개황.csv")
+names(df)
+df <- df[-1,]
+df <- df[c("월별.1.","평균기온....","평균상대습도....")]
+names(df) <- c("월별","건구온도","상대습도")
+df$불쾌지수 <- 0.81 * df$건구온도 + 0.01 * df$상대습도 * (0.99 & df$건구온도 -14.3) + 46.3
+df$불쾌지수단계 <- ifelse(df$불쾌지수 >= 80, "매우높음",
+                    ifelse(df$불쾌지수 >= 75, "높음",
+                    ifelse(df$불쾌지수 >= 68, "보통","낮음")))
+df1 <- df[c('월별',"불쾌지수단계")]
+df1
+
+library(ggplot2)
+ggplot(mapping =aes(x=월별, y=불쾌지수단계), data=df1) +
+  geom_bar(stat="identity", position=position_dodge()) +
+  ggtitle("월별 불쾌지수단계")+
+  theme(plot.title = element_text(hjust = 0.5,size=20,face='bold'), axis.text.x=element_text(angle=90, hjust=1))
