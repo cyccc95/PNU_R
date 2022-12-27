@@ -2,14 +2,18 @@
 # 고속도로 역주행 교통사고와 일반 교통사고 분석
 install.packages(("readxl"))
 library(readxl)
-df = read_excel("02_역주행사고.xlsx")
+df = read_excel("C:/Rwork/02/02_역주행사고.xlsx")
 names(df)
+df
 # 전체
 df1 = subset(df, df$구분 == "전체")
+df1
 # 역주행
 df2 = df[df$구분 == "역주행", ]
+df2
 # 일반
 df3 = df1
+
 df3$구분 = "일반"
 df3[c("사고", "사망")] = df1[c("사고", "사망")] - df2[c("사고", "사망")]
 df3
